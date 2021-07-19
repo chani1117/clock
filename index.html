@@ -16,11 +16,35 @@ body {
 #clock {
   background: rgba(0,0,0,0.3);
   margin: 0 auto;
+
+  font-family: "Menlo", sans-serif;
+  font-size: 40px;
+  color: #b7ff00;
+  text-shadow: 1px 1px 3px #333;
+  overflow: hidden;
+}
+
+#main {
+  background: rgba(0,0,0,0.3);
+  margin: 0 auto;
+  font-family: "Menlo", sans-serif;
+  font-size: 10px;
+  color: #b7ff00;
+  text-shadow: 1px 1px 3px #333;
+  overflow: hidden;
+}
+
+#move {
+  background: rgba(0,0,0,0);
+  margin: 0 auto;
   -webkit-user-select: none;
   -webkit-app-region: drag;
   cursor: move;
   font-family: "Menlo", sans-serif;
-  font-size: 60px;
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+  top:-7px;
   color: #b7ff00;
   text-shadow: 1px 1px 3px #333;
   overflow: hidden;
@@ -29,6 +53,26 @@ body {
   </head>
   <body>
     <div id="clock">i am clock!</div>
+    <div id="move">▣</div>
+    <div id="main">
+        <table>
+          <thead>
+            <tr>
+              <td>head1</td>
+              <td>head2</td>
+              <td>head3</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>body1</td>
+              <td><input id="button2" type="button" value="tttt"></input></td>
+              <td>body3</td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    
     <!-- <h1>Hello World!</h1> -->
     <!-- We are using node <script>document.write(process.versions.node)</script>, -->
     <!-- Chrome <script>document.write(process.versions.chrome)</script>, -->
@@ -41,7 +85,6 @@ body {
       if (value < 10) { value = "0" + value; }
       return value;
     }
-
     var updateClock = function() {
       var now = new Date();
       var hours = now.getHours();
@@ -54,10 +97,26 @@ body {
       clock.innerHTML = formatted;
     };
 
+
+
+    var testNum = 0;
+    var button2El = document.getElementById('button2')
+    var clockEl = document.getElementById('clock')
+
+    var increaseTestNum = function(){
+      testNum +=1;
+      button2El.value = testNum;
+    }
+    button2El.addEventListener('click',function(){
+      console.log('button2')
+      increaseTestNum();
+    })
+
     updateClock();
     window.setInterval(updateClock, 500);
 
-    document.addEventListener('dblclick', function() {
+    clockEl.addEventListener('dblclick', function() {
+      console.log('clockEl')
       window.close();
     });
   </script>

@@ -1,10 +1,13 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, globalShortcut } = require('electron');
 const path = require('path')
 const url = require('url')
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
+
+
 
 function createWindow () {
   // Create the browser window.
@@ -37,7 +40,23 @@ function createWindow () {
     // when you should delete the corresponding element.
     win = null
   })
+
+
 }
+
+app.on('browser-window-focus', function () {
+  globalShortcut.register("CommandOrControl+R", () => {
+      if(win!=null)win.reload();
+  });
+  globalShortcut.register("F5", () => {
+      if(win!=null)win.reload();
+  });
+});
+
+app.on('browser-window-blur', function () {
+  globalShortcut.unregister('CommandOrControl+R');
+  globalShortcut.unregister('F5');
+});
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
