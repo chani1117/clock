@@ -4,74 +4,193 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
       <style type="text/css">
+
+::-webkit-scrollbar { width: 0px; }
+html{
+  background: rgba(0, 0, 0, 0.2) !important;
+  height:240px;
+}
+
 html, html body {
-  background: rgba(0, 0, 0, 0) !important;
+  
   margin: 0;
   padding: 0;
   text-align: center;
+  display: -webkit-box;
+  -ms-user-select: none; 
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  overflow: hidden;
+  user-select: none;
 }
 body {
   color: #fff;
 }
-#clock {
-  background: rgba(0,0,0,0.3);
-  margin: 0 auto;
 
-  font-family: "Menlo", sans-serif;
-  font-size: 40px;
-  color: #b7ff00;
-  text-shadow: 1px 1px 3px #333;
-  overflow: hidden;
+.top-button{
+  
+    margin: 0px;
+    padding-top: 0;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-bottom: 2px;
+    font-family: "Menlo", sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    line-height: 19px;
+    /* color: rgba(0, 0, 0, 0); */
+    color: #b7ff00;
+    /* position: absolute; */
+    border: 1px solid rgba(0, 0, 0, 0);
+    overflow: hidden;
+    border-radius: 11px;
+}
+#bottom{
+	position: absolute;
+    bottom: 0;
+    left: 50%;
+	font-family: "Menlo", sans-serif;
+	font-size: 11px;
+	color: #b7ff00;
+	text-shadow: 1px 1px 3px #333;
 }
 
 #main {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0);
   margin: 0 auto;
+  margin-top:25px;
   font-family: "Menlo", sans-serif;
-  font-size: 10px;
+  font-size: 11px;
   color: #b7ff00;
   text-shadow: 1px 1px 3px #333;
-  overflow: hidden;
+}
+
+
+#tbody-div{
+  overflow:scroll;
+}
+
+.qDay{
+  color: rgba(165,183,127,1);
+}
+.qWeek{
+  color: rgba(187,196,238,1);
 }
 
 #move {
-  background: rgba(0,0,0,0);
-  margin: 0 auto;
+  /* background: rgb(0, 255, 0); */
   -webkit-user-select: none;
   -webkit-app-region: drag;
   cursor: move;
-  font-family: "Menlo", sans-serif;
-  font-size: 20px;
-  position: absolute;
-  left: 0;
-  top:-7px;
-  color: #b7ff00;
-  text-shadow: 1px 1px 3px #333;
-  overflow: hidden;
+  /* position: absolute;
+  left: 60px; */
 }
+#close {
+  /* background-color: rgba(255, 0, 0);
+  left: 0; */
+}
+
+#tray {
+  /* background-color: rgb(255, 255, 0);
+  position: absolute;
+  left: 30px; */
+}
+
+#config {
+  /* background-color: rgb(0, 0, 255);
+  position: absolute;
+  left: 90px; */
+}
+
+#top-buttons{
+  background-color: rgba(0,0,0,0);
+  position:absolute;
+  display: flex;
+  left:0;
+  top:0;
+}
+
+.off{
+  color: #567900;
+  cursor: default;
+}
+
+.count-button{
+  color: #fff !important;
+  background: rgba(0,0,0,0.3) !important;
+  border-radius: 8px !important;
+}
+
+#quest-parent,#quest, #tbody{
+	display: block;
+}
+#tbody{
+	height:230px;
+	overflow: scroll;
+}
+
+#quest-parent th,#quest th, #tbody td {
+  
+  align-items: center;
+  width: 60px;
+  text-align: center;
+  font-size: 0.875em;
+}
+.name-parnet{
+	width:60px !important;
+}
+.qDay-parent{
+	width:180px !important;
+}
+.qWeek-parent{
+	width:360px !important;
+}
+
       </style>
   </head>
   <body>
-    <div id="clock">i am clock!</div>
-    <div id="move">▣</div>
+    <div id="top-buttons">
+      <div id="close" class="top-button">close</div>
+      <div id="tray" class="top-button off">tray</div>
+      <div id="expand" class="top-button off">expand</div>
+      <div id="move" class="top-button">move</div>
+      <div id="addCharacter" class="top-button">addCharacter</div>
+      <div id="config" class="top-button off">config</div>
+      <div id="donate" class="top-button off">donate</div>
+      <div id="about" class="top-button">?</div>
+    </div>
+    
+    
     <div id="main">
         <table>
-          <thead>
-            <tr>
-              <td>head1</td>
-              <td>head2</td>
-              <td>head3</td>
+          <thead id="thead">
+            <tr id="quest-parent">
+              <th class="name-parnet"></th>
+              <th class="qDay qDay-parent" colspan="3">일간</th>
+              <th class="qWeek qWeek-parent" colspan="6">주간</th>
+              <!--<th>삭제</th>-->
+            </tr>
+            <tr id="quest">
+              <th></th>
+              <th class='qDay' data-count=3>에포나</th>
+              <th class='qDay' data-count=2>카던</th>
+              <th class='qDay' data-count=2>레이드</th>
+              <th class='qWeek' data-count=3>에포나</th>
+              <th class='qWeek' data-count=1>어비스레이드</th>
+              <th class='qWeek' data-count=1>어비스던전</th>
+              <th class='qWeek' data-count=3>도레</th>
+              <th class='qWeek' data-count=1>발탄</th>
+              <th class='qWeek' data-count=1>비아키스</th>
+              <!--<th class='cDelete' data-count='1'>삭제</th>-->
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>body1</td>
-              <td><input id="button2" type="button" value="tttt"></input></td>
-              <td>body3</td>
-            </tr>
+          <tbody id="tbody">
           </tbody>
+
         </table>
     </div>
+	<!--<div id="bottom"><p id="charNum">0</p></div>-->
     
     <!-- <h1>Hello World!</h1> -->
     <!-- We are using node <script>document.write(process.versions.node)</script>, -->
@@ -80,45 +199,137 @@ body {
   </body>
 
   <script>
-    var clock = document.getElementById("clock");
-    var zeroPad = function(value) {
-      if (value < 10) { value = "0" + value; }
-      return value;
+  const { dialog,BrowserWindow } = require('electron').remote;  //새로 사용할 질문창
+  const { remote }=require('electron');
+  
+
+    let closeEl = document.getElementById('close');
+    let aboutEl = document.getElementById('about');
+    let tbodyEl = document.getElementById('tbody');
+    let questEl = document.getElementById('quest');
+	let addCharacterEl = document.getElementById('addCharacter');
+	let characterNum = 0;
+
+
+    let addCharacter = function(cName){
+      let tr = document.createElement('tr')
+      let nameTd = document.createElement('td')
+      nameTd.innerText = cName;
+      tr.appendChild(nameTd);
+
+      let quests = document.getElementById('quest').children;
+      let tdCount = document.getElementById('quest').children.length;
+      
+      for(let i=1; i<tdCount; i++){
+        let td = document.createElement('td')
+        let btn = document.createElement('input')
+        btn.type = 'button'
+        btn.className = 'count-button'
+        btn.value = quests[i].dataset.count *1
+		btn.addEventListener('click',function(e){
+			let countVal = e.target.value;
+			if(countVal > 0){
+			e.target.value =  countVal-1;
+			}
+		});
+        if(i == tdCount+1){
+          btn.addEventListener('click',function(e){
+            e.target.parentNode.parentNode.remove();
+          })
+        }
+        td.appendChild(btn);
+        tr.appendChild(td);
+      }
+      tbodyEl.appendChild(tr)
+      
+	  
     }
-    var updateClock = function() {
-      var now = new Date();
-      var hours = now.getHours();
-      var minutes = zeroPad(now.getMinutes());
-      var seconds = zeroPad(now.getSeconds());
 
-      if (hours > 12) { hours -= 12; }
+    let winAbout = null;
+    aboutEl.addEventListener('click',function(){
+      if (winAbout === null) {
+      
+        winAbout = new BrowserWindow({
+          // backgroundColor: "rgba(0,0,0,0.2)",
+          titleBarStyle: 'customButtonsOnHover',
+          alwaysOnTop: true,
+          width: 210,
+          height: 100,
+          frame: false,
+          transparent: true,
+          x: window.screenX+100,
+          y: window.screenY+100,
+          webPreferences: {
+            nodeIntegration: true,
+            enableRemoteModule: true,
+            contextIsolation: false
+            }
+        });
+        
+        winAbout.on('closed', () => {
+          winAbout = null
+        })
 
-      var formatted = [hours, minutes, seconds].join(":");
-      clock.innerHTML = formatted;
-    };
-
-
-
-    var testNum = 0;
-    var button2El = document.getElementById('button2')
-    var clockEl = document.getElementById('clock')
-
-    var increaseTestNum = function(){
-      testNum +=1;
-      button2El.value = testNum;
-    }
-    button2El.addEventListener('click',function(){
-      console.log('button2')
-      increaseTestNum();
-    })
-
-    updateClock();
-    window.setInterval(updateClock, 500);
-
-    clockEl.addEventListener('dblclick', function() {
-      console.log('clockEl')
-      window.close();
+        // 또는 로컬 HTML 로드
+        winAbout.loadURL(`file://${__dirname}/about.html`)
+      }
     });
+
+    closeEl.addEventListener('click', function() {
+      	window.close();
+    });
+  
+    let winAddChar = null;
+	  addCharacterEl.addEventListener('click',function(){
+
+      if (winAddChar === null) {
+      
+      winAddChar = new BrowserWindow({
+        // backgroundColor: "rgba(0,0,0,0.2)",
+        titleBarStyle: 'customButtonsOnHover',
+        alwaysOnTop: true,
+        parent:remote.getCurrentWindow(),
+        modal:true,
+        width: window.outerWidth,
+        height: window.outerHeight,
+        frame: false,
+        transparent: true,
+        x: window.screenX,
+        y: window.screenY,
+        webPreferences: {
+          nodeIntegration: true,
+          enableRemoteModule: true,
+          contextIsolation: false
+          }
+      });
+      
+
+
+      winAddChar.on('closed', () => {
+        winAddChar = null
+      })
+
+      // 또는 로컬 HTML 로드
+      winAddChar.loadURL(`file://${__dirname}/addCharacterName.html`)
+
+		  //characterNum += 1;
+		  //addCharacter(characterNum);
+		  //document.getElementById('charNum').innerText = characterNum;
+      
+
+    }
+	  });
+
+
+  addCharacter('꿈결꽃잎(배마)');
+  addCharacter('꿈곁꽃잎(배마2)');
+  addCharacter('꿈결꽃입(스커)');
+  addCharacter('꿈결꽂잎(바드)');
+  addCharacter('기습없이정정당당히딜');
+
+  
+
   </script>
 
 </html>
+

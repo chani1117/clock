@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+      <style type="text/css">
+::-webkit-scrollbar { width: 0px; }
+html{
+  background: rgba(0, 0, 0, 0.2) !important;
+  height:240px;
+}
+
+html, html body {
+  
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  display: -webkit-box;
+  -ms-user-select: none; 
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  overflow: hidden;
+  user-select: none;
+}
+body {
+  color: #fff;
+}
+input { 
+  background-color: rgba(0,0,0);
+  color:#fff
+}
+#main{
+  position: absolute;
+  top:50%;
+  left:50%;
+  height:50px;
+  width:200px;
+  margin:-25px 0 0 -100px;
+}
+
+      </style>
+  </head>
+  <body>
+    <div id="top-buttons">
+      <div id="close" class="top-button">close</div>
+    </div>
+    
+    
+    <div id="main">
+        <input id="inputCharNm" type="text" value="test">
+        <input id="btnAddChar"type="button" value="Add Character">
+    </div>
+    
+    <!-- <h1>Hello World!</h1> -->
+    <!-- We are using node <script>document.write(process.versions.node)</script>, -->
+    <!-- Chrome <script>document.write(process.versions.chrome)</script>, -->
+    <!-- and Electron <script>document.write(process.versions.electron)</script>. -->
+  </body>
+
+  <script>
+  const { ipcRenderer } = require('electron'); 
+
+  
+
+
+    let elClose = document.getElementById('close');
+
+    elClose.addEventListener('click', function() {
+      window.close();
+    });
+
+    let elAddCharBtn = document.getElementById('btnAddChar');
+
+    elAddCharBtn.addEventListener('click',function(){
+      console.log('elAddClcik');
+      ipcRenderer.send('chAddCharName', document.getElementById('inputCharNm').value);
+    })
+
+  </script>
+
+</html>

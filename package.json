@@ -1,26 +1,27 @@
 {
-  "name": "clock",
+  "name": "mywidget",
   "version": "1.0.0",
   "main": "main.js",
   "author": "Chris Scharf <scharfie@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "set NODE_ENV=development&&electron main.js",
+    "build": "electron-builder build",
     "build:osx": "electron-builder --mac",
     "build:linux": "npm run build:linux32 && npm run build:linux64",
     "build:linux32": "electron-builder --linux --ia32",
     "build:linux64": "electron-builder --linux --x64",
     "build:win": "npm run build:win32 && npm run build:win64",
-    "build:win32": "electron-builder --win portable --ia32",
-    "build:win64": "electron-builder --win portable --x64"
+    "build:win32": "build --win  --ia32",
+    "build:win64": "build --win --x64"
   },
   "devDependencies": {
     "electron": "13.1.7",
     "electron-builder": "22.11.7"
   },
   "build": {
-    "productName": "clock",
-    "asar": true,
+    "productName": "myWidget",
+    "asar": false,
     "win": {
       "target": [
         {
@@ -30,12 +31,12 @@
             "ia32"
           ]
         }
-      ]
+      ],
+      "icon":"./build/GameIcon.ico"
     },
     "nsis": {
       "oneClick": true,
-      "perMachine": false,
-      "createDesktopShortcut": true
+      "perMachine": false
     }
   }
 }

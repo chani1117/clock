@@ -1,4 +1,4 @@
-const {app, BrowserWindow, globalShortcut } = require('electron');
+const {app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
 const path = require('path')
 const url = require('url')
 
@@ -15,12 +15,17 @@ function createWindow () {
     // backgroundColor: "rgba(0,0,0,0.2)",
     titleBarStyle: 'customButtonsOnHover',
     alwaysOnTop: true,
-    width: 300,
-    height: 70,
+    width: 640,
+    height: 175,
     frame: false,
     transparent: true,
     x: 0,
-    y: 0
+    y: 0,
+    webPreferences: {
+      nodeIntegration: true,
+      enableRemoteModule: true,
+      contextIsolation: false
+    }
   })
 
   // and load the index.html of the app.
@@ -46,9 +51,11 @@ function createWindow () {
 
 app.on('browser-window-focus', function () {
   globalShortcut.register("CommandOrControl+R", () => {
+    console.log('control r')
       if(win!=null)win.reload();
   });
   globalShortcut.register("F5", () => {
+    console.log('f5')
       if(win!=null)win.reload();
   });
 });
@@ -80,5 +87,8 @@ app.on('activate', () => {
   }
 })
 
+ipcMain.on('chAddCharName',(evt,payload)=>{
+  console.log(payload)
+});
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.);
