@@ -12,8 +12,8 @@
     "build:linux32": "electron-builder --linux --ia32",
     "build:linux64": "electron-builder --linux --x64",
     "build:win": "npm run build:win32 && npm run build:win64",
-    "build:win32": "build --win  --ia32",
-    "build:win64": "build --win --x64"
+    "build:win32": "electron-builder build --win  --ia32",
+    "build:win64": "electron-builder build --win --x64"
   },
   "devDependencies": {
     "electron": "13.1.7",
@@ -32,11 +32,14 @@
           ]
         }
       ],
-      "icon":"./build/GameIcon.ico"
+      "icon": "./build/Gameicon.png"
     },
     "nsis": {
-      "oneClick": true,
+      "oneClick": false,
       "perMachine": false
     }
+  },
+  "dependencies": {
+    "sqlite3": "5.0.2"
   }
 }
