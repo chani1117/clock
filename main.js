@@ -1,6 +1,8 @@
 const {app, BrowserWindow, globalShortcut, ipcMain } = require('electron');
 const path = require('path')
 const url = require('url')
+const scripts = require('./script.js');
+
 
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -86,6 +88,12 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+
+ipcMain.on('insert', (event, arg, arg2) => {
+  console.log("=================main.js=================");
+  scripts.insert(arg, arg2);
+});
 
 ipcMain.on('chAddCharName',(evt,payload)=>{
   console.log(payload)
