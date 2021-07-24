@@ -10,7 +10,6 @@ const scripts = require('./script.js');
 let win
 
 
-
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
@@ -90,9 +89,21 @@ app.on('activate', () => {
 })
 
 
-ipcMain.on('insert', (event, arg, arg2) => {
-  console.log("=================main.js=================");
-  scripts.insert(arg, arg2);
+ipcMain.on('dbLoad', (event, payload) => {
+  console.log(payload);
+  console.log(scripts.getProcessStatus()*100 + '%');
+});
+
+ipcMain.on('getQuestList', (event) => {
+  scripts.getQuestList().then(((res)=>{
+    event.sender.send('getQuestList', res);
+  })
+});
+
+ipcMain.on('getCharacterList', (event) => {
+  scripts.getCharacterList().then((value)=>{
+    event.sender.send('getCharacterList', value);
+  })
 });
 
 ipcMain.on('chAddCharName',(evt,payload)=>{
@@ -100,3 +111,4 @@ ipcMain.on('chAddCharName',(evt,payload)=>{
 });
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.);
+
